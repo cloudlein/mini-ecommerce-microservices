@@ -1,12 +1,3 @@
-# Ignore everything by default
-*
-
-# Allow documentation
-!docs/
-!docs/**
-!README.md
-!.gitignore
-
-# Allow sub-projects directories but not their content (unless they are documented later)
-# If you want to push specific microservice code later, you can add them with "!" prefix
-# For now, we only allow documentation as requested.
+docs/
+README.md
+.gitignore
