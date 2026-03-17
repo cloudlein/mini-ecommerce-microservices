@@ -3,13 +3,15 @@
 Track the progress of the Mini E-Commerce Microservices project across all phases.
 
 ## Phase 1: Core Infrastructure
-- [ ] Initialize Docker Compose with PostgreSQL, Redis, and RabbitMQ
+## Phase 1: Core Infrastructure
+- [/] Initialize Docker Compose with PostgreSQL, Redis, and RabbitMQ
 - [ ] Set up API Gateway (Spring Cloud Gateway / Kong)
 - [ ] Implement Service Discovery (Consul/Eureka)
 - [ ] Configure centralized configuration (Spring Cloud Config)
 
 ## Phase 2: Service Development
 ### User Service (Java)
+- [x] Define project metadata and structure
 - [ ] Auth module (JWT + Argon2)
 - [ ] User CRUD operations
 - [ ] Database migrations (Liquibase)
