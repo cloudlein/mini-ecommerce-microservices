@@ -1,6 +1,6 @@
 package com.mini.ecommerce.user.application.port.in;
 
-import com.mini.ecommerce.user.application.dto.UserResponse;
+import com.mini.ecommerce.user.application.dto.PaginationResponse;import com.mini.ecommerce.user.application.dto.UserResponse;
 
 import java.awt.print.Pageable;
 
