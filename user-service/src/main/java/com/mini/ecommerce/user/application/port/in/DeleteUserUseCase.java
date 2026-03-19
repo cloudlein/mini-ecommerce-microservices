@@ -1,5 +1,7 @@
 package com.mini.ecommerce.user.application.port.in;
 
+import java.util.UUID;
+
 public interface DeleteUserUseCase {
-    void deleteUser(Long userId);
+    void deleteUser(UUID userId);
 }

@@ -1,5 +1,6 @@
 package com.mini.ecommerce.user.application.dto;
 
+
 import lombok.*;
 
 import java.util.List;
@@ -16,5 +17,6 @@ public class PaginationResponse<T> {
     private long totalElements;
     private int size;
     private boolean last;
+    private String nextCursor;
 
 }
