@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run Trivy (Filesystem)
-        uses: aquasecurity/trivy-action@v0.33.1
+        uses: aquasecurity/trivy-action@v0.35.0
         with:
           scan-type: 'fs'
           scan-ref: '.'
@@ -46,7 +46,7 @@ jobs:
 
       - name: Scan Docker image with Trivy
         if: ${{ matrix.service == 'user-service' }}
-        uses: aquasecurity/trivy-action@v0.33.1
+        uses: aquasecurity/trivy-action@v0.35.0
         with:
           image-ref: 'test-${{ matrix.service }}'
           ignore-unfixed: true
