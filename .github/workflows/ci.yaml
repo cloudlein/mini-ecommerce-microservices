@@ -1,0 +1,56 @@
+name: Continuous Integration (CI)
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test-java-services:
+    name: Test Java Services (User, Order)
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service: [ "user-service", "order-service" ]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: gradle
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x ./${{ matrix.service }}/gradlew
+      
+    - name: Build and Test with Gradle
+      working-directory: ./${{ matrix.service }}
+      run: ./gradlew build
+
+  test-golang-services:
+    name: Test Golang Services (Product, Payment)
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service: [ "product-service", "payment-service" ]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.21'
+        cache-dependency-path: ./${{ matrix.service }}/go.sum
+
+    - name: Build
+      working-directory: ./${{ matrix.service }}
+      run: go build -v ./...
+
+    - name: Test
+      working-directory: ./${{ matrix.service }}
+      run: go test -v ./...
