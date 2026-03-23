@@ -9,6 +9,11 @@ import java.time.LocalDateTime;import java.util.UUID;
 
 @Entity
 @Table(name = "users")
+@lombok.Getter
+@lombok.Setter
+@lombok.NoArgsConstructor
+@lombok.AllArgsConstructor
+@lombok.Builder(toBuilder = true)
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

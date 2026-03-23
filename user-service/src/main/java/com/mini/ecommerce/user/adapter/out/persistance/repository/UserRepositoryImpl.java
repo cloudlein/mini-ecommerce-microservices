@@ -47,6 +47,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    @org.springframework.transaction.annotation.Transactional
     public void delete(UUID userId) {
         jpaUserRepository.deleteById(userId);
     }
