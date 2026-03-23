@@ -1,6 +1,7 @@
 package com.mini.ecommerce.user.application.port.in;
 
-import com.mini.ecommerce.user.application.dto.PaginationResponse;import com.mini.ecommerce.user.application.dto.UserResponse;
+import com.mini.ecommerce.user.application.dto.user.PaginationResponse;
+import com.mini.ecommerce.user.application.dto.user.UserResponse;
 
 import org.springframework.data.domain.Pageable;
 import java.util.UUID;

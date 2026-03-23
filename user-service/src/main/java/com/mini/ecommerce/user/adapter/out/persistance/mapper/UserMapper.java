@@ -1,7 +1,7 @@
 package com.mini.ecommerce.user.adapter.out.persistance.mapper;
 
-import com.mini.ecommerce.user.application.dto.CreateUserRequest;
-import com.mini.ecommerce.user.application.dto.UserResponse;
+import com.mini.ecommerce.user.application.dto.user.CreateUserRequest;
+import com.mini.ecommerce.user.application.dto.user.UserResponse;
 import com.mini.ecommerce.user.domain.model.User;
 import com.mini.ecommerce.user.adapter.out.persistance.entity.UserEntity;
 import org.mapstruct.Mapper;

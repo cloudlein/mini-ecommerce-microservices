@@ -1,8 +1,8 @@
 package com.mini.ecommerce.user.application.service;
 
 import com.mini.ecommerce.user.adapter.out.persistance.mapper.UserMapper;
-import com.mini.ecommerce.user.application.dto.UpdateUserRequest;
-import com.mini.ecommerce.user.application.dto.UserResponse;
+import com.mini.ecommerce.user.application.dto.user.UpdateUserRequest;
+import com.mini.ecommerce.user.application.dto.user.UserResponse;
 import com.mini.ecommerce.user.application.exception.ConflictException;
 import com.mini.ecommerce.user.application.exception.ResourceNotFoundException;
 import com.mini.ecommerce.user.application.port.in.UpdateUserUseCase;

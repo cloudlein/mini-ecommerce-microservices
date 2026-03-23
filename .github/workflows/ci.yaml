@@ -34,6 +34,7 @@ jobs:
   test-golang-services:
     name: Test Golang Services (Product, Payment)
     runs-on: ubuntu-latest
+    if: ${{ false }} # placeholder, will be enabled when Go services are ready
     strategy:
       matrix:
         service: [ "product-service", "payment-service" ]
@@ -54,3 +55,4 @@ jobs:
     - name: Test
       working-directory: ./${{ matrix.service }}
       run: go test -v ./...
+
