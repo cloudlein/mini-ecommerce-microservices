@@ -5,6 +5,9 @@
 *.ipr
 out/
 
+### VS Code ###
+.vscode/
+
 ### Gradle ###
 .gradle/
 build/
@@ -16,3 +19,13 @@ Thumbs.db
 
 ### Miscellaneous ###
 *.log
+*.tmp
+*.log.*
+
+### JVM build artifacts ###
+*.class
+*.jar
+*.war
+
+.env
+env.example
