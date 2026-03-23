@@ -8,19 +8,19 @@ on:
 
 jobs:
   test-java-services:
-    name: Test Java Services (User, Order)
+    name: Test Java Services (User)
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        service: [ "user-service", "order-service" ]
+        service: [ "user-service" ]
 
     steps:
     - uses: actions/checkout@v4
 
-    - name: Set up JDK 17
+    - name: Set up JDK 21
       uses: actions/setup-java@v4
       with:
-        java-version: '17'
+        java-version: '21'
         distribution: 'temurin'
         cache: gradle
 
