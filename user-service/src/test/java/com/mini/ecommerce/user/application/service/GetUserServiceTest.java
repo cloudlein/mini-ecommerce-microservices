@@ -1,8 +1,8 @@
 package com.mini.ecommerce.user.application.service;
 
 import com.mini.ecommerce.user.adapter.out.persistance.mapper.UserMapper;
-import com.mini.ecommerce.user.application.dto.PaginationResponse;
-import com.mini.ecommerce.user.application.dto.UserResponse;
+import com.mini.ecommerce.user.application.dto.user.PaginationResponse;
+import com.mini.ecommerce.user.application.dto.user.UserResponse;
 import com.mini.ecommerce.user.application.exception.ResourceNotFoundException;
 import com.mini.ecommerce.user.domain.model.User;
 import com.mini.ecommerce.user.domain.repository.UserRepository;

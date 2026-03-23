@@ -1,0 +1,53 @@
+name: "Container and Dependency Security Scan"
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  schedule:
+    - cron: '0 4 * * 1' # Weekly on Monday
+
+jobs:
+  trivy-file-system:
+    name: Trivy FS Scan (source + dependencies)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Trivy (Filesystem)
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: 'fs'
+          ignore-unfixed: true
+          format: 'table'
+          severity: 'CRITICAL,HIGH'
+          exit-code: '1'
+
+  trivy-images:
+    name: Trivy Image Scan (built Docker images)
+    runs-on: ubuntu-latest
+    needs: trivy-file-system
+    strategy:
+      matrix:
+        service: [ "user-service", "order-service", "product-service", "payment-service", "api-gateway" ]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: |
+          docker build -t test-${{ matrix.service }} ./${{ matrix.service }}
+
+      - name: Scan Docker image with Trivy
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: 'test-${{ matrix.service }}'
+          ignore-unfixed: true
+          format: 'table'
+          severity: 'CRITICAL,HIGH'
+          exit-code: '1'
+

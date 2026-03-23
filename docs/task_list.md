@@ -12,8 +12,8 @@ Track the progress of the Mini E-Commerce Microservices project across all phase
 ## Phase 2: Service Development
 ### User Service (Java)
 - [x] Define project metadata and structure
-- [ ] Auth module (JWT + Argon2)
-- [ ] User CRUD operations + cursor pagination
+- [x] Auth module (JWT + Argon2)
+- [x] User CRUD operations + cursor pagination
 - [ ] Database migrations (Liquibase)
 
 ### Product Service (Go)

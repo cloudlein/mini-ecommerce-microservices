@@ -1,4 +1,4 @@
-package com.mini.ecommerce.user.application.dto;
+package com.mini.ecommerce.user.application.dto.auth;
 
 
 import lombok.AllArgsConstructor;
@@ -7,14 +7,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
-
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateUserRequest {
+public class LoginRequest {
 
     private String email;
     private String password;
-    private String fullName;
 
 }

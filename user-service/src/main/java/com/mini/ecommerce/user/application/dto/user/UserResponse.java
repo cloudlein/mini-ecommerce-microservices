@@ -1,4 +1,4 @@
-package com.mini.ecommerce.user.application.dto;
+package com.mini.ecommerce.user.application.dto.user;
 
 import lombok.*;
 import java.util.UUID;

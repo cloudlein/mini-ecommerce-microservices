@@ -1,7 +1,7 @@
 package com.mini.ecommerce.user.application.port.in;
 
-import com.mini.ecommerce.user.application.dto.UpdateUserRequest;
-import com.mini.ecommerce.user.application.dto.UserResponse;
+import com.mini.ecommerce.user.application.dto.user.UpdateUserRequest;
+import com.mini.ecommerce.user.application.dto.user.UserResponse;
 
 import java.util.UUID;
 
