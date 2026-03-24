@@ -24,8 +24,9 @@ RUN ./gradlew bootJar --no-daemon -x test -q
 # ============================================================
 FROM eclipse-temurin:21-jre-alpine AS runtime
 
-# Security: run as non-root user
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+# Security: run as non-root user and upgrade OS packages to fix vulnerabilities (CVEs)
+RUN apk upgrade --no-cache && \
+    addgroup -S appgroup && adduser -S appuser -G appgroup
 
 WORKDIR /app
 
