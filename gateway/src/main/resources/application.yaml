@@ -1,10 +1,12 @@
 spring:
   application:
     name: gateway
+  config:
+    import: "optional:configserver:"
   cloud:
     gateway:
       routes:
         - id: user-service
-          url: lb://user-service'
+          url: lb://user-service
           predicates:
             - Path=/api/v1/users/**
