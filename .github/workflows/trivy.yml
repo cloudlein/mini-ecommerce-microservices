@@ -33,19 +33,17 @@ jobs:
     needs: trivy-file-system
     strategy:
       matrix:
-        service: [ "user-service", "order-service", "product-service", "payment-service", "api-gateway" ]
+        service: [ "user-service", "gateway", "discoveryclient" ]
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Build Docker image
-        if: ${{ matrix.service == 'user-service' }}
         run: |
           docker build -t test-${{ matrix.service }} ./${{ matrix.service }}
 
       - name: Scan Docker image with Trivy
-        if: ${{ matrix.service == 'user-service' }}
         uses: aquasecurity/trivy-action@v0.35.0
         with:
           image-ref: 'test-${{ matrix.service }}'

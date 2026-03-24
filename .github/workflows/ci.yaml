@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        service: [ "user-service" ]
+        service: [ "user-service", "gateway" ]
 
     steps:
     - uses: actions/checkout@v4
@@ -30,6 +30,8 @@ jobs:
     - name: Build and Test with Gradle
       working-directory: ./${{ matrix.service }}
       run: ./gradlew build
+      env:
+        SPRING_CLOUD_CONFIG_ENABLED: false
 
   test-golang-services:
     name: Test Golang Services (Product, Payment)
