@@ -4,6 +4,7 @@ WORKDIR /app
 
 # Copy gradle wrapper and dependency files
 COPY gradlew .
+RUN chmod +x gradlew
 COPY gradle gradle
 COPY build.gradle .
 COPY settings.gradle .
