@@ -1,6 +1,7 @@
 package com.mini.ecommerce.user.adapter.in.web.security;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,11 +18,18 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfig {
 
+    @Value("${security.argon2.salt-length}") private int saltLength;
+    @Value("${security.argon2.hash-length}") private int hashLength;
+    @Value("${security.argon2.parallelism}") private int parallelism;
+    @Value("${security.argon2.memory}") private int memory;
+    @Value("${security.argon2.iterations}") private int iterations;
+
+
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new Argon2PasswordEncoder(16,32, 1, 16384, 2);
+        return new Argon2PasswordEncoder(saltLength, hashLength, parallelism, memory, iterations);
     }
 
     @Bean
