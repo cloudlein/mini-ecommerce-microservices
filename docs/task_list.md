@@ -3,10 +3,9 @@
 Track the progress of the Mini E-Commerce Microservices project across all phases.
 
 ## Phase 1: Core Infrastructure
-## Phase 1: Core Infrastructure
 - [x] Initialize Docker Compose with PostgreSQL, Redis, and RabbitMQ
-- [ ] Set up API Gateway (Spring Cloud Gateway / Kong)
-- [ ] Implement Service Discovery (Consul/Eureka)
+- [x] Set up API Gateway (Spring Cloud Gateway)
+- [x] Implement Service Discovery (Eureka)
 - [ ] Configure centralized configuration (Spring Cloud Config)
 
 ## Phase 2: Service Development
@@ -35,7 +34,7 @@ Track the progress of the Mini E-Commerce Microservices project across all phase
 - [ ] Keycloak integration for OIDC
 
 ## Phase 4: DevOps & Deployment
-- [ ] CI/CD pipelines (GitHub Actions)
+- [x] CI/CD pipelines (GitHub Actions)
 - [ ] Helm charts for Kubernetes
 - [ ] Horizontal Pod Autoscaling (HPA)
 - [ ] Stress testing with JMeter / k6

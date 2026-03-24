@@ -26,6 +26,8 @@ jobs:
           format: 'table'
           severity: 'CRITICAL,HIGH'
           exit-code: '1'
+        env:
+          TRIVY_DISABLE_VEX_NOTICE: true
 
   trivy-images:
     name: Trivy Image Scan (built Docker images)
@@ -33,7 +35,7 @@ jobs:
     needs: trivy-file-system
     strategy:
       matrix:
-        service: [ "user-service", "gateway", "discoveryclient" ]
+        service: [ "user-service", "gateway", "discoveryclient", "configserver" ]
 
     steps:
       - name: Checkout repository
@@ -51,3 +53,5 @@ jobs:
           format: 'table'
           severity: 'CRITICAL,HIGH'
           exit-code: '1'
+        env:
+          TRIVY_DISABLE_VEX_NOTICE: true

@@ -30,11 +30,14 @@ jobs:
           JAVA_HOME: /opt/jdk
         with:
           project: "mini-ecommerce-microservices-java"
-          path: "user-service"
+          path: "."
           format: "HTML"
           out: "reports"
           args: >
             --enableExperimental
+            --exclude **/configrepo/**
+            --exclude **/build/**
+            --exclude **/.gradle/**
 
       - name: Upload dependency-check report
         uses: actions/upload-artifact@v4

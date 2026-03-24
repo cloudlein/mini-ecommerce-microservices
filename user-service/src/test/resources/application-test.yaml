@@ -1,4 +1,7 @@
 spring:
+  cloud:
+    config:
+      enabled: false
   datasource:
     url: jdbc:h2:mem:user-service-test-db;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
     username: sa
@@ -16,6 +19,12 @@ security:
   jwt:
     secret: dGVzdF9qd3Rfc2VjcmV0X2Zvcl90ZXN0X3Byb2plY3Q=
     expiration-in-ms: 3600000
+  argon2:
+    salt-length: 16
+    hash-length: 32
+    parallelism: 1
+    memory: 16384
+    iterations: 2
 
 jwt:
   secret: dGVzdF9qd3Rfc2VjcmV0X2Zvcl90ZXN0X3Byb2plY3Q=
