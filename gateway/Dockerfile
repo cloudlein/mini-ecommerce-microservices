@@ -26,6 +26,9 @@ RUN java -Djarmode=layertools -jar app.jar extract
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 
+# Upgrade OS packages to fix vulnerabilities
+RUN apk update && apk upgrade --no-cache
+
 # Security: Run as non-root user
 RUN addgroup -S spring && adduser -S spring -G spring
 USER spring:spring
