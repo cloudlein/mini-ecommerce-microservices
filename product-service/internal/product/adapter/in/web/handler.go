@@ -1,6 +1,7 @@
 package web
 
 import (
+	"errors"
 	"net/http"
 	"product-service/internal/product/application/port/in"
 	"product-service/internal/product/domain/exception"
@@ -27,12 +28,24 @@ func (h *InventoryHandler) Reserve(c *gin.Context) {
 	// mapping
 	err := h.useCase.ReserveStock(req.ID, req.Qty)
 	if err != nil {
-		switch err {
-			case exception.ErrInsufficientStock{
-				ProductID: "",
-				Available: 0,
-				Requested: 0,
-			}
+		var stockErr *exception.ErrInsufficientStock
+		var notFoundErr *exception.ErrProductNotFound
+		switch {
+		case errors.As(err, &stockErr):
+			c.JSON(http.StatusConflict, gin.H{
+				"error":     "Insufficient stock",
+				"available": stockErr.Available,
+				"requested": stockErr.Requested,
+			})
+		case errors.As(err, &notFoundErr):
+			c.JSON(http.StatusNotFound, gin.H{
+				"error": "Product not found",
+			})
+		default:
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal server error", "details": err.Error()})
 		}
+		return
 	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "Stock reserved successfully"})
 }
