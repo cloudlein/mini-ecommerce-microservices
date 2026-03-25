@@ -35,7 +35,7 @@ jobs:
     needs: trivy-file-system
     strategy:
       matrix:
-        service: [ "user-service", "gateway", "discoveryclient", "configserver" ]
+        service: [ "user-service", "gateway", "discovery-client", "config-server" ]
 
     steps:
       - name: Checkout repository

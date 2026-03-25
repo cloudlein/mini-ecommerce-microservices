@@ -13,13 +13,13 @@ updates:
     open-pull-requests-limit: 5
 
   - package-ecosystem: "gradle"
-    directory: "/discoveryclient"
+    directory: "/discovery-client"
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 5
 
   - package-ecosystem: "gradle"
-    directory: "/configserver"
+    directory: "/config-server"
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 5

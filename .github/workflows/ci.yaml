@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        service: [ "user-service", "gateway", "configserver", "discoveryclient" ]
+        service: [ "user-service", "gateway", "config-server", "discovery-client" ]
 
     steps:
     - uses: actions/checkout@v4

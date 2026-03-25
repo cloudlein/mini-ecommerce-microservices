@@ -1,13 +1,13 @@
 spring:
   application:
-    name: configserver
+    name: config-server
   profiles:
     active: native
   cloud:
     config:
       server:
         native:
-          search-locations: file:///E:/project/mini-ecommerce-microservices/configrepo
+          search-locations: file:///E:/project/mini-ecommerce-microservices/config-repo
   security:
     user:
       name: config

@@ -6,7 +6,7 @@ Track the progress of the Mini E-Commerce Microservices project across all phase
 - [x] Initialize Docker Compose with PostgreSQL, Redis, and RabbitMQ
 - [x] Set up API Gateway (Spring Cloud Gateway)
 - [x] Implement Service Discovery (Eureka)
-- [ ] Configure centralized configuration (Spring Cloud Config)
+- [x] Configure centralized configuration (Spring Cloud Config)
 
 ## Phase 2: Service Development
 ### User Service (Java)

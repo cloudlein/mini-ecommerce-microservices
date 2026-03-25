@@ -1,6 +1,6 @@
 spring:
   application:
-    name: discoveryclient
+    name: discovery-client
 
 
 server:
