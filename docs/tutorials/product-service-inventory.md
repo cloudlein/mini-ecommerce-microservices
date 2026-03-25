@@ -39,6 +39,7 @@ product-service/
 ### A. Domain Entities (`internal/product/domain/model`)
 The domain layer must stay "pure" (no DB tags or external library references).
 
+`internal/product/domain/model/inventory.go`
 ```go
 package model
 
@@ -53,10 +54,25 @@ func (i *Inventory) CanReserve(quantity int) bool {
 }
 ```
 
-### B. Ports (`internal/product/application/port`)
+### B. Domain Exceptions (`internal/product/domain/exception/errors.go`)
+Define business-level errors that are agnostic of the transport layer.
+
+```go
+package exception
+
+import "errors"
+
+var (
+	ErrInsufficientStock = errors.New("insufficient stock available")
+	ErrProductNotFound    = errors.New("product not found")
+)
+```
+
+### C. Ports (`internal/product/application/port`)
 Define the "What" before the "How".
 
 - **Inbound Port**: Defines what the service does.
+`internal/product/application/port/in/inventory_usecase.go`
 ```go
 package in
 
@@ -66,6 +82,7 @@ type InventoryUseCase interface {
 ```
 
 - **Outbound Port**: Defines how the service interacts with the database.
+`internal/product/application/port/out/inventory_repository.go`
 ```go
 package out
 
@@ -75,13 +92,17 @@ type InventoryRepository interface {
 }
 ```
 
-### C. Application Service (`internal/product/application/service`)
+### D. Application Service (`internal/product/application/service`)
 Strictly for business orchestration. It only depends on interfaces (Ports).
 
+`internal/product/application/service/inventory_service.go`
 ```go
 package service
 
-import "product-service/internal/product/application/port/out"
+import (
+	"product-service/internal/product/application/port/out"
+	"product-service/internal/product/domain/exception"
+)
 
 type inventoryService struct {
     repo out.InventoryRepository
@@ -95,7 +116,7 @@ func (s *inventoryService) ReserveStock(id string, qty int) error {
     inv, err := s.repo.GetByProductID(id)
     if err != nil { return err }
 
-    if !inv.CanReserve(qty) { return ErrInsufficientStock }
+    if !inv.CanReserve(qty) { return exception.ErrInsufficientStock }
 
     inv.Stock -= qty
     inv.Reserved += qty
@@ -104,21 +125,68 @@ func (s *inventoryService) ReserveStock(id string, qty int) error {
 }
 ```
 
-### D. Driving Adapter (Gin)
-Handles transport logic only.
+### E. Driving Adapter (Gin)
+Handles transport logic only, translating HTTP requests to UseCase calls.
 
+#### 1. Contract/DTO (`internal/product/adapter/in/web/dto.go`)
+Define the request and response structures here. Use framework-specific tags for validation.
 ```go
-func (h *Handler) Reserve(c *gin.Context) {
-    var req ReserveRequest
-    if err := c.ShouldBindJSON(&req); err != nil {
-        c.JSON(400, gin.H{"error": "Invalid format"})
-        return
-    }
+package web
 
-    err := h.useCase.ReserveStock(req.ID, req.Qty)
-    // Handle specific domain errors (409 Conflict vs 404 Not Found)
+type ReserveRequest struct {
+	ID  string `json:"product_id" binding:"required"`
+	Qty int    `json:"quantity" binding:"required,gt=0"`
 }
 ```
+
+#### 2. Handler (`internal/product/adapter/in/web/handler.go`)
+The handler orchestrates the flow. It binds the DTO and maps it to the UseCase.
+```go
+package web
+
+import (
+	"net/http"
+	"product-service/internal/product/application/port/in"
+	"product-service/internal/product/domain/exception"
+	"github.com/gin-gonic/gin"
+)
+
+type InventoryHandler struct {
+	useCase in.InventoryUseCase
+}
+
+func NewInventoryHandler(u in.InventoryUseCase) *InventoryHandler {
+	return &InventoryHandler{useCase: u}
+}
+
+func (h *InventoryHandler) Reserve(c *gin.Context) {
+	var req ReserveRequest
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid format", "details": err.Error()})
+		return
+	}
+
+	// Mapping DTO to UseCase Parameters
+	err := h.useCase.ReserveStock(req.ID, req.Qty)
+	if err != nil {
+		switch err {
+		case exception.ErrInsufficientStock:
+			c.JSON(http.StatusConflict, gin.H{"error": "Insufficient stock"})
+		case exception.ErrProductNotFound:
+			c.JSON(http.StatusNotFound, gin.H{"error": "Product not found"})
+		default:
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal server error"})
+		}
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"status": "Stock reserved successfully"})
+}
+```
+
+> [!TIP]
+> **Best Practice: DTO Separation**
+> Keep your DTOs in the Adapter layer. They are specifically for the Web transport (JSON tags, binding validation). The UseCase layer should remain "pure" and independent of the framework. This prevents infrastructure details from leaking into your business logic.
 
 ---
 
