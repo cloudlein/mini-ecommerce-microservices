@@ -22,11 +22,15 @@ Track the progress of the Mini E-Commerce Microservices project across all phase
 - [ ] Redis caching integration
 - [ ] gRPC server for stock checks
 
-### Order & Payment Services
-- [ ] Order lifecycle state machine
+### Order Service
+- [ ] Order lifecycle state machine (Saga Orchestration)
 - [ ] Saga pattern choreography logic
-- [ ] Payment gateway simulation
-- [ ] Retry & dead-letter queue (DLQ) for events
+- [ ] Order-related event producers/consumers
+
+### Payment Service
+- [ ] Payment gateway simulation (Stripe/PayPal Mock)
+- [ ] Payment transaction records & status tracking
+- [ ] Retry & dead-letter queue (DLQ) for payment events
 
 ## Phase 3: Observability & Security
 - [ ] Prometheus + Grafana dashboards
