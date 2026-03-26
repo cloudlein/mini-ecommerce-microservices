@@ -16,9 +16,10 @@ Track the progress of the Mini E-Commerce Microservices project across all phase
 - [ ] Database migrations (Liquibase)
 
 ### Product Service (Go)
-- [ ] Inventory management logic
+- [x] Inventory management logic & Domain models
+- [x] GORM & PostgreSQL persistence layer
+- [x] RESTful API with Gin (Reserve Stock)
 - [ ] Redis caching integration
-- [ ] GIN and B-Tree indexing setup
 - [ ] gRPC server for stock checks
 
 ### Order & Payment Services
