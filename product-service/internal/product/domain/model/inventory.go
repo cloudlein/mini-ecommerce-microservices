@@ -6,6 +6,6 @@ type Inventory struct {
 	Reserved  int
 }
 
-func (i *Inventory) canReserve(quantity int) bool {
+func (i *Inventory) CanReserve(quantity int) bool {
 	return i.Stock >= quantity
 }
