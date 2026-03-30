@@ -40,6 +40,8 @@ Track the progress of the Mini E-Commerce Microservices project across all phase
 
 ## Phase 4: DevOps & Deployment
 - [x] CI/CD pipelines (GitHub Actions)
+- [x] Add installation documentation
 - [ ] Helm charts for Kubernetes
+
 - [ ] Horizontal Pod Autoscaling (HPA)
 - [ ] Stress testing with JMeter / k6
